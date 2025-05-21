@@ -3,12 +3,12 @@ import heapq
 
 def dijkstra(grafo, origen, destino):
     
-    heap = [(0, 1, origen, [origen])]
+    heap = [(0, origen, [origen])]
     visitados = set()
     
     while heap:
     
-        costo, _, nodo, camino = heapq.heappop(heap)
+        costo, nodo, camino = heapq.heappop(heap)
     
         if nodo == destino:
             return camino, costo
@@ -20,7 +20,7 @@ def dijkstra(grafo, origen, destino):
         for vecino, peso in grafo[nodo].items():
     
             if vecino not in visitados:
-                heapq.heappush(heap, (costo + peso, len(camino) + 1, vecino, camino + [vecino]))
+                heapq.heappush(heap, (costo + peso, vecino, camino + [vecino]))
     
     return None, float('inf')
 
